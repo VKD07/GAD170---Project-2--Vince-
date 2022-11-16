@@ -30,6 +30,7 @@ public class EnemyScript : MonoBehaviour
 
     void Start()
     {
+        
         Player = GameObject.FindGameObjectWithTag("Player");
         scoreHandler = FindObjectOfType<ScoreHandler>();
         healthBar = GetComponentInChildren<HealthBarRotation>();

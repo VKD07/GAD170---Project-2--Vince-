@@ -22,6 +22,9 @@ public class HealthBarRotation : MonoBehaviour
 
     public void SetHealthBar(int Health)
     {
-        slider.value = Health;
+        if (slider != null)
+        {
+            slider.value = Health;
+        }
     }
 }

@@ -23,6 +23,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] Transform GunPosition;
     [SerializeField] float BulletMaxDistance = 100f;
     [SerializeField] LayerMask bulletTarget;
+    [SerializeField] Animator GunAnimation;
 
     [Header("Player Stats")]
     [SerializeField] int Health = 100;
@@ -131,6 +132,8 @@ public class PlayerScript : MonoBehaviour
 
             if(hit.collider.gameObject.tag == "Enemy" && Input.GetKeyDown(KeyCode.Mouse0))
             {
+                GunAnimation.SetTrigger("FireGun");
+
                 hit.collider.gameObject.GetComponent<EnemyScript>().DamageEnemy((int)Damage);
             }
         }
