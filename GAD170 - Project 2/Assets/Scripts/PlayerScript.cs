@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
 using UnityEngine;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -39,8 +40,6 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject ScoreUI;
     [SerializeField] GameObject GunSightUI;
 
-
-
     //Player Components
     Rigidbody playerRB;
 
@@ -60,6 +59,11 @@ public class PlayerScript : MonoBehaviour
         BombItem();
         ShieldItem();
         DeathHandler();
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Break();
+        }
     }
 
     private void DeathHandler()
@@ -106,8 +110,7 @@ public class PlayerScript : MonoBehaviour
         xRotation -= yMouse;
         xRotation = Mathf.Clamp(xRotation, -50f, 50f);
         playerCamera.transform.eulerAngles = new Vector3(xRotation, playerCamera.transform.eulerAngles.y, playerCamera.transform.eulerAngles.z);
-    
-
+   
         //Player Jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -117,13 +120,11 @@ public class PlayerScript : MonoBehaviour
                 playerRB.AddForce(playerJumpPos);
             }
         }
-
     }
-
 
     public void PlayerGun()
     {
-        Ray ray = new Ray(GunPosition.position, GunPosition.transform.forward);
+        Ray ray = new Ray(GunPosition.position, GunPosition.TransformDirection(Vector3.forward));
         RaycastHit hit;
 
         if(Physics.Raycast(ray, out hit, BulletMaxDistance, bulletTarget))
@@ -139,7 +140,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            Debug.DrawLine(GunPosition.position, GunPosition.transform.forward * BulletMaxDistance, Color.green);
+            Debug.DrawLine(GunPosition.position, GunPosition.TransformDirection(Vector3.forward) * BulletMaxDistance, Color.green);
         }
     }
 
@@ -173,6 +174,7 @@ public class PlayerScript : MonoBehaviour
     {
         return Health;
     }
+
     public void AddPlayerHealth(int health)
     {
         Health += health;
@@ -182,13 +184,13 @@ public class PlayerScript : MonoBehaviour
             Health = 100;
         }
     }
+
     public float GetPlayerDamage()
     {
         return Damage;
     }
 
     //Collision Handle
-
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Enemy")
@@ -198,8 +200,6 @@ public class PlayerScript : MonoBehaviour
                 Health -= (int)collision.gameObject.GetComponent<EnemyScript>().EnemyDamage();
             }
         }
-
-      
     }
 
     private void OnTriggerEnter(Collider other)

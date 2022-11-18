@@ -23,14 +23,14 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] GameObject[] Powerups;
 
     //References
-    GameObject Player;
+   public GameObject Player;
     HealthBarRotation healthBar;
 
 
 
     void Start()
     {
-        
+
         Player = GameObject.FindGameObjectWithTag("Player");
         scoreHandler = FindObjectOfType<ScoreHandler>();
         healthBar = GetComponentInChildren<HealthBarRotation>();
@@ -66,8 +66,11 @@ public class EnemyScript : MonoBehaviour
     private void EnemyMovement()
     {
         float step = speed * Time.deltaTime;
-        Vector3 enemyPos = new Vector3(transform.position.x, 0.68f, transform.position.z);
+        Vector3 enemyPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         transform.position = Vector3.MoveTowards(enemyPos, Player.transform.position, step);
+
+        transform.LookAt(Player.transform);
+
     }
 
     void DropAPowerUp()

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4982199351214908846}
   - component: {fileID: 4982199351214908845}
   - component: {fileID: 4982199351214908844}
+  - component: {fileID: 1225192744039969803}
   m_Layer: 0
   m_Name: HealthPotion
   m_TagString: HealthPotion
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4982199351214908843}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.628, y: 1.7490003, z: -0.03999996}
-  m_LocalScale: {x: 0.40975603, y: 0.40975603, z: 0.40975603}
+  m_LocalScale: {x: 0.21427374, y: 0.24243103, z: 0.27437526}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4982199351214908843}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 5060444177187149915, guid: a49bea51ae84abc46ba5b5a8ef332979, type: 3}
 --- !u!23 &4982199351214908846
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -95,7 +96,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0.17}
 --- !u!114 &4982199351214908844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,3 +110,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HPvalue: 20
+--- !u!95 &1225192744039969803
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4982199351214908843}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 335693cc8142fd040ae3979352754d58, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
