@@ -22,6 +22,8 @@ public class EnemyScript : MonoBehaviour
     [Header("Enemy Droppable PowerUps")]
     [SerializeField] GameObject[] powerUps;
 
+    [SerializeField] ParticleSystem Explosion;
+
     //References
    public GameObject player;
     HealthBarRotation healthBar;
@@ -58,9 +60,10 @@ public class EnemyScript : MonoBehaviour
     {
         if(health <= 0)
         {
+            Explosion.Play();
             scoreHandler.AddScore(pointsPerKill);
             DropAPowerUp();
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, 0.1f);
         } 
     }
 

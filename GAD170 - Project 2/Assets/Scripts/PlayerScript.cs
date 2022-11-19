@@ -25,6 +25,11 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] float bulletMaxDistance = 100f;
     [SerializeField] LayerMask bulletTarget;
     [SerializeField] Animator gunAnimation;
+    [SerializeField] ParticleSystem muzzleFlash;
+
+    [Header("Sounds")]
+    [SerializeField] AudioClip GunShot;
+    [SerializeField] AudioSource audioSource;
 
     [Header("Player Stats")]
     [SerializeField] int health = 100;
@@ -131,6 +136,7 @@ public class PlayerScript : MonoBehaviour
             {
                 gunAnimation.SetTrigger("FireGun");
                 hit.collider.gameObject.GetComponent<EnemyScript>().DamageEnemy((int)damage);
+                muzzleFlash.Play();
             }
         }
         else
