@@ -111,6 +111,7 @@ public class PlayerScript : MonoBehaviour
         {
             if(isGrounded == true)
             {
+                isGrounded = false;
                 Vector3 playerJumpPos = new Vector3(0f, jumpForce, 0f);
                 playerRB.AddForce(playerJumpPos);
             }
@@ -186,6 +187,11 @@ public class PlayerScript : MonoBehaviour
                 health -= (int)collision.gameObject.GetComponent<EnemyScript>().EnemyDamage();
                 Destroy(collision.gameObject);
             }
+        }
+
+        if(collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
         }
     }
   

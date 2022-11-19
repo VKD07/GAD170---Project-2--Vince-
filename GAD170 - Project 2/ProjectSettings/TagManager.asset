@@ -9,6 +9,7 @@ TagManager:
   - Bomb
   - Shield
   - Spawner
+  - Ground
   layers:
   - Default
   - TransparentFX
