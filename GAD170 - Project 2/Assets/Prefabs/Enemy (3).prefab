@@ -421,7 +421,7 @@ Transform:
   m_LocalScale: {x: 1.6396875, y: 1.6396875, z: 1.6396875}
   m_Children:
   - {fileID: 1079535344}
-  - {fileID: 2688257188013223558}
+  - {fileID: 4156858792339726330}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -515,7 +515,9 @@ MonoBehaviour:
   - {fileID: 3137848351450670123, guid: affd7817b80e6b946865915e80045057, type: 3}
   - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
   - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
-  Explosion: {fileID: 959372754161145750}
+  explosion: {fileID: 1274196299474003690}
+  explosionSound: {fileID: 8300000, guid: 6ec55b6cf5c9aff419e8ee64acfd1021, type: 3}
+  audioSource: {fileID: 0}
   player: {fileID: 0}
 --- !u!54 &7960931231973475254
 Rigidbody:
@@ -533,13 +535,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!1001 &6366429123317998952
+--- !u!1001 &4946257690900255764
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 5540553429492736319}
     m_Modifications:
+    - target: {fileID: 6127844251706635006, guid: 0a11e7d38a61e354d9873e6a0534fc1c, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7159512581442545553, guid: 0a11e7d38a61e354d9873e6a0534fc1c, type: 3}
       propertyPath: m_Name
       value: Explosion
@@ -590,13 +596,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a11e7d38a61e354d9873e6a0534fc1c, type: 3}
---- !u!4 &2688257188013223558 stripped
+--- !u!4 &4156858792339726330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9012971853651184622, guid: 0a11e7d38a61e354d9873e6a0534fc1c, type: 3}
-  m_PrefabInstance: {fileID: 6366429123317998952}
+  m_PrefabInstance: {fileID: 4946257690900255764}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &959372754161145750 stripped
+--- !u!198 &1274196299474003690 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 6127844251706635006, guid: 0a11e7d38a61e354d9873e6a0534fc1c, type: 3}
-  m_PrefabInstance: {fileID: 6366429123317998952}
+  m_PrefabInstance: {fileID: 4946257690900255764}
   m_PrefabAsset: {fileID: 0}

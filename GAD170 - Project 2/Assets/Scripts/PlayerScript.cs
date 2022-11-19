@@ -44,33 +44,34 @@ public class PlayerScript : MonoBehaviour
     //Player Components
     Rigidbody playerRB;
 
-    //Delagate
+    //Event Delegate
     public delegate void DeathEvent();
     public DeathEvent deathEvent;
 
     void Start()
     {
+        //The cursor will be locked in the center of the screen
         Cursor.lockState = CursorLockMode.Locked;
+        //Getting the player Rigid Body Component
         playerRB = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerMovement();
+        //Responsible for the player movement
+        PlayerMovement(); 
+        //Responsible for the Gun
         PlayerGun();
+        //Responsible if ever the player collected a shield
         ShieldItem();
+        //Responsible if the player dies
         DeathHandler();
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Debug.Break();
-        }
-     
     }
 
     private void DeathHandler()
     {
+        //If the health is 0 or less then the death screen UI will be activate, triggering the the functions that are subscribed to the death event.
        if(health <= 0)
         {
                 deathScreen.SetActive(true);
@@ -78,6 +79,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
+            //If the health is not 0 then the game is unpaused;
             Time.timeScale = 1f;
         }
     }
@@ -87,14 +89,15 @@ public class PlayerScript : MonoBehaviour
         //Getting Keyboard Input Values
         float zPos = Input.GetAxis("Vertical");
         float xPos = Input.GetAxis("Horizontal");
+        //Getting the mouse axis and multiplying it with a float, so that we can control the mouse sensitivty.
         float xMouse = Input.GetAxis("Mouse X") * mouseSensitivityX * Time.deltaTime;
         float yMouse = Input.GetAxis("Mouse Y") * mouseSensitivityY * Time.deltaTime;
         
-        // Player Movement
+        // Player Movement multiplying it with float speed so that we can control the speed value.
         Vector3 playerPos = transform.forward * zPos + transform.right * xPos;
         transform.position += playerPos * normalSpeed * Time.deltaTime;
 
-        //Sprint
+        //Player sprinting
         if (Input.GetKey(KeyCode.LeftShift))
         {
             normalSpeed = runSpeed;
@@ -104,14 +107,13 @@ public class PlayerScript : MonoBehaviour
             normalSpeed = walkSpeed;
         }
 
-        //Mouse Rotation
+        //Mouse Rotation for the camera
         transform.Rotate(0f, xMouse, 0f);
-
         xRotation -= yMouse;
         xRotation = Mathf.Clamp(xRotation, -50f, 50f);
         playerCamera.transform.eulerAngles = new Vector3(xRotation, playerCamera.transform.eulerAngles.y, playerCamera.transform.eulerAngles.z);
    
-        //Player Jump
+        //The player can press space and jump if it is touching the ground
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if(isGrounded == true)
@@ -125,15 +127,20 @@ public class PlayerScript : MonoBehaviour
 
     public void PlayerGun()
     {
+        //Creating a ray, from gun position to the forward direction of the gun position
         Ray ray = new Ray(gunPosition.position, gunPosition.TransformDirection(Vector3.forward));
+        //Ray cast hit to store the values of whatever object is hit by the ray
         RaycastHit hit;
-
+        
+        //if the ray hits the player, then player can begin to shoot, this will trigger the sound, the particles, the animation and damages the enemy
         if(Physics.Raycast(ray, out hit, bulletMaxDistance, bulletTarget))
         {
+            //creating a line to see the ray, The color will turn red if it hits an enemy
             Debug.DrawLine(gunPosition.position, hit.point, Color.red);
 
             if(hit.collider.gameObject.tag == "Enemy" && Input.GetKeyDown(KeyCode.Mouse0))
             {
+                audioSource.PlayOneShot(GunShot);
                 gunAnimation.SetTrigger("FireGun");
                 hit.collider.gameObject.GetComponent<EnemyScript>().DamageEnemy((int)damage);
                 muzzleFlash.Play();
@@ -141,12 +148,14 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
+            //the line ray will be green if its not hitting the enemy
             Debug.DrawLine(gunPosition.position, gunPosition.TransformDirection(Vector3.forward) * bulletMaxDistance, Color.green);
         }
     }
 
     private void ShieldItem()
     {
+        //If the shield has been collided then print it to the consol and start the shield duration
         if(shield == true)
         {
             print("Shield has now been Activated");
@@ -162,12 +171,15 @@ public class PlayerScript : MonoBehaviour
         shield = false;
     }
 
-    //Get and Set Functions
+    //Below are the getter and settter functions that is used to cross reference--------------------------------
+
+    //Returning the player health value
     public int PlayerHealth()
     {
         return health;
     }
 
+    //Setting the player health
     public void AddPlayerHealth(int health)
     {
         this.health += health;
@@ -178,14 +190,16 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    //Returning the damage of the player
     public float GetPlayerDamage()
     {
         return damage;
     }
 
-    //Collision Handle
+    //Collision Handler -----------------------------------------------------
     private void OnCollisionEnter(Collision collision)
     {
+        //if the enemy collides with this player and shield isnt activated then, the player health will be deducted and the enemy will be destroyed
         if(collision.gameObject.tag == "Enemy")
         {
             if (shield == false)
@@ -195,15 +209,16 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
+        //If the player is touching the ground then tell the system that player is in the ground
         if(collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
         }
     }
   
-
     private void OnTriggerEnter(Collider other)
     {
+        //if the player collided with an object that has tag shield, then tell the system to activate the shield and destroy the shield power up
         if (other.tag == "Shield")
         {
             shield = true;

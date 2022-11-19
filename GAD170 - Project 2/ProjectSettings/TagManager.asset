@@ -10,6 +10,7 @@ TagManager:
   - Shield
   - Spawner
   - Ground
+  - AudioPlayer
   layers:
   - Default
   - TransparentFX

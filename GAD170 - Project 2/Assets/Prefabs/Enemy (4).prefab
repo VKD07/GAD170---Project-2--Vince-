@@ -126,7 +126,9 @@ MonoBehaviour:
   - {fileID: 3137848351450670123, guid: affd7817b80e6b946865915e80045057, type: 3}
   - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
   - {fileID: 3137848351450670123, guid: affd7817b80e6b946865915e80045057, type: 3}
-  Explosion: {fileID: 4120420580052054819}
+  explosion: {fileID: 4120420580052054819}
+  explosionSound: {fileID: 8300000, guid: 6ec55b6cf5c9aff419e8ee64acfd1021, type: 3}
+  audioSource: {fileID: 0}
   player: {fileID: 0}
 --- !u!54 &957428654809418120
 Rigidbody:
@@ -161,15 +163,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9012971853651184622, guid: 0a11e7d38a61e354d9873e6a0534fc1c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.23135476
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9012971853651184622, guid: 0a11e7d38a61e354d9873e6a0534fc1c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.20005
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9012971853651184622, guid: 0a11e7d38a61e354d9873e6a0534fc1c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 64.603615
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9012971853651184622, guid: 0a11e7d38a61e354d9873e6a0534fc1c, type: 3}
       propertyPath: m_LocalRotation.w

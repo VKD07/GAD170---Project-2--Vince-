@@ -13,17 +13,20 @@ public class ScoreHandler : MonoBehaviour
     [SerializeField] Text healthValue;
     [SerializeField] PlayerScript playerScript;
 
-    public int TotalScore;
+    public int totalScore;
 
-    // Update is called once per frame
     void Update()
     {
+        //Responsible for the health UI
         HealthValueUI();
+
+        //Responsible for the Score UI
         ScoretextUI();
     }
 
     void HealthValueUI()
     {
+        //If the player script is detected then set the UI text value with the player health
         if (playerScript != null)
         {
             healthValue.text = playerScript.PlayerHealth().ToString();
@@ -32,16 +35,17 @@ public class ScoreHandler : MonoBehaviour
 
     void ScoretextUI()
     {
-        scoreValue.text = TotalScore.ToString("000000");
-        endScore.text = TotalScore.ToString("000000");
+        //Setting the score text in the UIs with the score gathered from the player
+        scoreValue.text = totalScore.ToString("000000");
+        endScore.text = totalScore.ToString("000000");
     }
 
     //get and set Function
+
+    //Used for adding the score to the total score
     public void AddScore(int score)
     {
-        TotalScore += score;
+        totalScore += score;
     }
-
-
 
 }// End of Class
