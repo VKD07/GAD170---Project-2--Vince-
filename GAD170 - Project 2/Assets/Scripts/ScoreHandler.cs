@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class ScoreHandler : MonoBehaviour
 {
     [Header("UI References")]
-    [SerializeField] Text ScoreValue;
-    [SerializeField] TextMeshProUGUI EndScore;
-    [SerializeField] Text HealthValue;
+    [SerializeField] Text scoreValue;
+    [SerializeField] TextMeshProUGUI endScore;
+    [SerializeField] Text healthValue;
     [SerializeField] PlayerScript playerScript;
 
     public int TotalScore;
@@ -26,14 +26,14 @@ public class ScoreHandler : MonoBehaviour
     {
         if (playerScript != null)
         {
-            HealthValue.text = playerScript.PlayerHealth().ToString();
+            healthValue.text = playerScript.PlayerHealth().ToString();
         }
     }
 
     void ScoretextUI()
     {
-        ScoreValue.text = TotalScore.ToString("000000");
-        EndScore.text = TotalScore.ToString("000000");
+        scoreValue.text = TotalScore.ToString("000000");
+        endScore.text = TotalScore.ToString("000000");
     }
 
     //get and set Function

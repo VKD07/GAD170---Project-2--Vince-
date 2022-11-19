@@ -11,8 +11,8 @@ public class EnemyScript : MonoBehaviour
 
     [Header("Enemy Stats")]
     [SerializeField] float speed = 2f;
-    [SerializeField] int Health = 100;
-    [SerializeField] float Damage = 5f;
+    [SerializeField] int health = 100;
+    [SerializeField] float damage = 5f;
 
 
     [Header("Score Reference")]
@@ -20,18 +20,19 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] int pointsPerKill = 10;
 
     [Header("Enemy Droppable PowerUps")]
-    [SerializeField] GameObject[] Powerups;
+    [SerializeField] GameObject[] powerUps;
 
     //References
-   public GameObject Player;
+   public GameObject player;
     HealthBarRotation healthBar;
+
 
 
 
     void Start()
     {
 
-        Player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         scoreHandler = FindObjectOfType<ScoreHandler>();
         healthBar = GetComponentInChildren<HealthBarRotation>();
 
@@ -49,54 +50,56 @@ public class EnemyScript : MonoBehaviour
     {
         if (healthBar != null)
         {
-            healthBar.SetHealthBar(Health);
+            healthBar.SetHealthBar(health);
         }
     }
 
     private void EnemyDeath()
     {
-        if(Health <= 0)
+        if(health <= 0)
         {
             scoreHandler.AddScore(pointsPerKill);
             DropAPowerUp();
             Destroy(this.gameObject);
-        }
+        } 
     }
+
+
 
     private void EnemyMovement()
     {
         float step = speed * Time.deltaTime;
         Vector3 enemyPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        transform.position = Vector3.MoveTowards(enemyPos, Player.transform.position, step);
+        transform.position = Vector3.MoveTowards(enemyPos, player.transform.position, step);
 
-        transform.LookAt(Player.transform);
+        transform.LookAt(player.transform);
 
     }
 
     void DropAPowerUp()
     {
-       int randomNum = UnityEngine.Random.Range(0, Powerups.Length);
+       int randomNum = UnityEngine.Random.Range(0, powerUps.Length);
 
-       Instantiate(Powerups[randomNum], transform.position, Quaternion.identity);
+       Instantiate(powerUps[randomNum], transform.position, Quaternion.identity);
    
     }
 
     //Get and Set functions
-    public void DamageEnemy(int Damage)
+    public void DamageEnemy(int damage)
     {
-        Health -= Damage;
+        health -= damage;
     }
 
     public float EnemyDamage()
     {
-        return Damage;
+        return damage;
     }
 
     private void OnTriggerEnter(Collider other)
     {
        if(other.tag == "Bomb")
         {
-            Health = 0;
+            health = 0;
         }
     }
 }

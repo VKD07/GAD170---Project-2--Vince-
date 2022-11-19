@@ -1061,10 +1061,7 @@ MonoBehaviour:
   Health: 10
   bombItem: {fileID: 1420740095945360883, guid: 72b4c527fc573f547988fa262fa3ec61, type: 3}
   ShieldDuration: 5
-  DeathScreen: {fileID: 818934222}
-  HealthUI: {fileID: 232230949}
-  ScoreUI: {fileID: 626863430}
-  GunSightUI: {fileID: 284262113}
+  deathScreen: {fileID: 818934222}
 --- !u!1 &625196647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,6 +1370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 818934223}
+  - component: {fileID: 818934224}
   m_Layer: 5
   m_Name: DeathScreen
   m_TagString: Untagged
@@ -1403,6 +1401,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &818934224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818934222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82336fe426c59174ba0269364110f5ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthUI: {fileID: 232230949}
+  ScoreUI: {fileID: 626863430}
+  GunSightUI: {fileID: 284262113}
+  playerScript: {fileID: 0}
 --- !u!1 &896942126
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,45 +10,45 @@ public class PlayerScript : MonoBehaviour
 {
     [Header("Player Movement")]
     [SerializeField] Transform playerCamera;
-    [SerializeField] float NormalSpeed = 3.5f;
-    [SerializeField] float WalkSpeed = 3.5f;
-    [SerializeField] float RunSpeed = 7f;
-    [SerializeField] float JumpForce = 10f;
-    [SerializeField] float MouseSensitivityX = 100f;
-    [SerializeField] float MouseSensitivityY = 100f;
+    [SerializeField] float normalSpeed = 3.5f;
+    [SerializeField] float walkSpeed = 3.5f;
+    [SerializeField] float runSpeed = 7f;
+    [SerializeField] float jumpForce = 10f;
+    [SerializeField] float mouseSensitivityX = 100f;
+    [SerializeField] float mouseSensitivityY = 100f;
     bool isGrounded = true;
     float xRotation;
 
     [Header("Player Gun")]
-    [SerializeField] float Damage = 25f;
-    [SerializeField] Transform GunPosition;
-    [SerializeField] float BulletMaxDistance = 100f;
+    [SerializeField] float damage = 25f;
+    [SerializeField] Transform gunPosition;
+    [SerializeField] float bulletMaxDistance = 100f;
     [SerializeField] LayerMask bulletTarget;
-    [SerializeField] Animator GunAnimation;
+    [SerializeField] Animator gunAnimation;
 
     [Header("Player Stats")]
-    [SerializeField] int Health = 100;
+    [SerializeField] int health = 100;
 
     [Header("PowerUps")]
     [SerializeField] GameObject bombItem;
-    [SerializeField] float ShieldDuration = 5f;
-    bool Shield = false;
+    [SerializeField] float shieldDuration = 5f;
+    HealthPotion healthPotion;
+    bool shield = false;
 
-    [Header("Death Reference")]
-    [SerializeField] GameObject DeathScreen;
-    [SerializeField] GameObject HealthUI;
-    [SerializeField] GameObject ScoreUI;
-    [SerializeField] GameObject GunSightUI;
+    [Header("DeathScreen Reference")]
+    [SerializeField] GameObject deathScreen;
 
     //Player Components
     Rigidbody playerRB;
 
+    //Delagate
+    public delegate void DeathEvent();
+    public DeathEvent deathEvent;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         playerRB = GetComponent<Rigidbody>();
-        DeathScreen.SetActive(false);
     }
 
     // Update is called once per frame
@@ -64,21 +64,19 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Break();
         }
+     
     }
 
     private void DeathHandler()
     {
-       if(Health <= 0)
+       if(health <= 0)
         {
-            DeathScreen.SetActive(true);
-         
-            HealthUI.SetActive(false);
-            ScoreUI.SetActive(false);
-            GunSightUI.SetActive(false);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            Time.timeScale = 0;
-            this.GetComponent<PlayerScript>().enabled = false;
+                deathScreen.SetActive(true);
+                deathEvent();
+        }
+        else
+        {
+            Time.timeScale = 1f;
         }
     }
 
@@ -87,21 +85,21 @@ public class PlayerScript : MonoBehaviour
         //Getting Keyboard Input Values
         float zPos = Input.GetAxis("Vertical");
         float xPos = Input.GetAxis("Horizontal");
-        float xMouse = Input.GetAxis("Mouse X") * MouseSensitivityX * Time.deltaTime;
-        float yMouse = Input.GetAxis("Mouse Y") *MouseSensitivityY * Time.deltaTime;
+        float xMouse = Input.GetAxis("Mouse X") * mouseSensitivityX * Time.deltaTime;
+        float yMouse = Input.GetAxis("Mouse Y") * mouseSensitivityY * Time.deltaTime;
         
         // Player Movement
         Vector3 playerPos = transform.forward * zPos + transform.right * xPos;
-        transform.position += playerPos * NormalSpeed * Time.deltaTime;
+        transform.position += playerPos * normalSpeed * Time.deltaTime;
 
         //Sprint
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            NormalSpeed = RunSpeed;
+            normalSpeed = runSpeed;
         }
         else
         {
-            NormalSpeed = WalkSpeed;
+            normalSpeed = walkSpeed;
         }
 
         //Mouse Rotation
@@ -116,7 +114,7 @@ public class PlayerScript : MonoBehaviour
         {
             if(isGrounded == true)
             {
-                Vector3 playerJumpPos = new Vector3(0f, JumpForce, 0f);
+                Vector3 playerJumpPos = new Vector3(0f, jumpForce, 0f);
                 playerRB.AddForce(playerJumpPos);
             }
         }
@@ -124,23 +122,22 @@ public class PlayerScript : MonoBehaviour
 
     public void PlayerGun()
     {
-        Ray ray = new Ray(GunPosition.position, GunPosition.TransformDirection(Vector3.forward));
+        Ray ray = new Ray(gunPosition.position, gunPosition.TransformDirection(Vector3.forward));
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit, BulletMaxDistance, bulletTarget))
+        if(Physics.Raycast(ray, out hit, bulletMaxDistance, bulletTarget))
         {
-            Debug.DrawLine(GunPosition.position, hit.point, Color.red);
+            Debug.DrawLine(gunPosition.position, hit.point, Color.red);
 
             if(hit.collider.gameObject.tag == "Enemy" && Input.GetKeyDown(KeyCode.Mouse0))
             {
-                GunAnimation.SetTrigger("FireGun");
-
-                hit.collider.gameObject.GetComponent<EnemyScript>().DamageEnemy((int)Damage);
+                gunAnimation.SetTrigger("FireGun");
+                hit.collider.gameObject.GetComponent<EnemyScript>().DamageEnemy((int)damage);
             }
         }
         else
         {
-            Debug.DrawLine(GunPosition.position, GunPosition.TransformDirection(Vector3.forward) * BulletMaxDistance, Color.green);
+            Debug.DrawLine(gunPosition.position, gunPosition.TransformDirection(Vector3.forward) * bulletMaxDistance, Color.green);
         }
     }
 
@@ -154,7 +151,7 @@ public class PlayerScript : MonoBehaviour
 
     private void ShieldItem()
     {
-        if(Shield == true)
+        if(shield == true)
         {
             print("Shield has now been Activated");
             StartCoroutine(StartShieldTimer());
@@ -164,30 +161,30 @@ public class PlayerScript : MonoBehaviour
     //Shield timer
     IEnumerator StartShieldTimer()
     {
-        yield return new WaitForSeconds(ShieldDuration);
+        yield return new WaitForSeconds(shieldDuration);
         print("Shield is now deactivated");
-        Shield = false;
+        shield = false;
     }
 
     //Get and Set Functions
     public int PlayerHealth()
     {
-        return Health;
+        return health;
     }
 
     public void AddPlayerHealth(int health)
     {
-        Health += health;
+        this.health += health;
         
-        if(Health > 100)
+        if(this.health > 100)
         {
-            Health = 100;
+            this.health = 100;
         }
     }
 
     public float GetPlayerDamage()
     {
-        return Damage;
+        return damage;
     }
 
     //Collision Handle
@@ -195,18 +192,20 @@ public class PlayerScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
-            if (Shield == false)
+            if (shield == false)
             {
-                Health -= (int)collision.gameObject.GetComponent<EnemyScript>().EnemyDamage();
+                health -= (int)collision.gameObject.GetComponent<EnemyScript>().EnemyDamage();
+                Destroy(collision.gameObject);
             }
         }
     }
+  
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Shield")
         {
-            Shield = true;
+            shield = true;
             Destroy(other.gameObject);
         }
     }

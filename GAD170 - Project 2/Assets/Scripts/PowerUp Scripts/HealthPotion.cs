@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class HealthPotion : MonoBehaviour
 {
-    [SerializeField] int HPvalue = 20;
+    [SerializeField] int hpValue = 20;
     PlayerScript playerScript;
+
+
     void Start()
     {
         playerScript = FindObjectOfType<PlayerScript>();
@@ -15,7 +17,7 @@ public class HealthPotion : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            playerScript.AddPlayerHealth(HPvalue);
+            playerScript.AddPlayerHealth(hpValue);
             Destroy(gameObject);
         }
     }

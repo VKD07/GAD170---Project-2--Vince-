@@ -5,26 +5,26 @@ using UnityEngine.UI;
 
 public class HealthBarRotation : MonoBehaviour
 {
-    GameObject Player;
+    GameObject player;
     Slider slider;
 
     private void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         slider = GetComponent<Slider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(Player.transform);
+        transform.LookAt(player.transform);
     }
 
-    public void SetHealthBar(int Health)
+    public void SetHealthBar(int health)
     {
         if (slider != null)
         {
-            slider.value = Health;
+            slider.value = health;
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class enemySpawner : MonoBehaviour
 {
-    [SerializeField] GameObject [] Enemies;
+    [SerializeField] GameObject [] enemies;
 
     int randomNum;
 
@@ -19,9 +19,9 @@ public class enemySpawner : MonoBehaviour
     {
         while (true)
         {
-            for (int i = 0; i < Enemies.Length; i++)
+            for (int i = 0; i < enemies.Length; i++)
             {
-                Instantiate(Enemies[i], transform.position, Quaternion.identity);
+                Instantiate(enemies[i], transform.position, Quaternion.identity);
                 randomNum = UnityEngine.Random.Range(1, 6);
                 yield return new WaitForSeconds(randomNum);
             }
