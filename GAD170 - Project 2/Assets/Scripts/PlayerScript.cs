@@ -30,9 +30,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] int health = 100;
 
     [Header("PowerUps")]
-    [SerializeField] GameObject bombItem;
     [SerializeField] float shieldDuration = 5f;
-    HealthPotion healthPotion;
     bool shield = false;
 
     [Header("DeathScreen Reference")]
@@ -56,7 +54,6 @@ public class PlayerScript : MonoBehaviour
     {
         PlayerMovement();
         PlayerGun();
-        BombItem();
         ShieldItem();
         DeathHandler();
 
@@ -138,14 +135,6 @@ public class PlayerScript : MonoBehaviour
         else
         {
             Debug.DrawLine(gunPosition.position, gunPosition.TransformDirection(Vector3.forward) * bulletMaxDistance, Color.green);
-        }
-    }
-
-    private void BombItem()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Instantiate(bombItem, transform.position, Quaternion.identity);
         }
     }
 

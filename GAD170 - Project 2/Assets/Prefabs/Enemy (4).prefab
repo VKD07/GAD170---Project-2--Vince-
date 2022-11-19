@@ -111,10 +111,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  health: 100
+  health: 50
   damage: 5
   pointsPerKill: 5
-  powerUps: []
+  powerUps:
+  - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
+  - {fileID: 1420740095945360883, guid: 72b4c527fc573f547988fa262fa3ec61, type: 3}
+  - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
+  - {fileID: 4982199351214908843, guid: acfcda7ffe296834db8845424bcc7082, type: 3}
+  - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
+  - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
+  - {fileID: 4982199351214908843, guid: acfcda7ffe296834db8845424bcc7082, type: 3}
+  - {fileID: 3137848351450670123, guid: affd7817b80e6b946865915e80045057, type: 3}
+  - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
+  - {fileID: 3137848351450670123, guid: affd7817b80e6b946865915e80045057, type: 3}
   player: {fileID: 0}
 --- !u!54 &957428654809418120
 Rigidbody:

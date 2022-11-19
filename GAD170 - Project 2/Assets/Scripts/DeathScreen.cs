@@ -10,7 +10,7 @@ public class DeathScreen : MonoBehaviour
     [SerializeField] GameObject gunSightUI;
     [SerializeField] PlayerScript playerScript;
 
-    private void OnDisable()
+    private void OnEnable()
     {
         playerScript = FindObjectOfType<PlayerScript>();
         playerScript.deathEvent += deathScreen;

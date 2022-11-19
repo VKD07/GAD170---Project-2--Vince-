@@ -17,13 +17,15 @@ public class enemySpawner : MonoBehaviour
  
     IEnumerator SpawnEnemy()
     {
-       
+        while (true)
+        {
             for (int i = 0; i < enemies.Length; i++)
             {
                 Instantiate(enemies[i], transform.position, Quaternion.identity);
                 randomNum = UnityEngine.Random.Range(1, 6);
                 yield return new WaitForSeconds(randomNum);
             }
+        }
         
     }
    

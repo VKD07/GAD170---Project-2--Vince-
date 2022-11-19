@@ -84,9 +84,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 150
+  m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 150
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -500,21 +500,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  Health: 150
-  Damage: 5
+  health: 150
+  damage: 5
   pointsPerKill: 20
-  Powerups:
+  powerUps:
+  - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
+  - {fileID: 1420740095945360883, guid: 72b4c527fc573f547988fa262fa3ec61, type: 3}
+  - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
   - {fileID: 4982199351214908843, guid: acfcda7ffe296834db8845424bcc7082, type: 3}
   - {fileID: 4982199351214908843, guid: acfcda7ffe296834db8845424bcc7082, type: 3}
   - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
-  - {fileID: 1420740095945360883, guid: 72b4c527fc573f547988fa262fa3ec61, type: 3}
+  - {fileID: 3137848351450670123, guid: affd7817b80e6b946865915e80045057, type: 3}
   - {fileID: 3137848351450670123, guid: affd7817b80e6b946865915e80045057, type: 3}
   - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
   - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
-  - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
-  - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
-  - {fileID: 1397827846901923337, guid: f81406b1a5a56fa4bb3a62e4a8190426, type: 3}
-  Player: {fileID: 0}
+  player: {fileID: 0}
 --- !u!54 &7960931231973475254
 Rigidbody:
   m_ObjectHideFlags: 0
